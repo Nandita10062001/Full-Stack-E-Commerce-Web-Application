@@ -36,6 +36,10 @@
   border-bottom: 2px solid black;
 }
 
+.nav-link btn btn-link.active{
+  border-bottom: 2px solid black;
+}
+
 .navbar-brand{
   font-weight: 700;
   font-family: 'roboto', sans-serif;
