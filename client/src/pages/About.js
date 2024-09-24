@@ -4,7 +4,7 @@ import '../index.css';
 
 const About = () => {
   return (
-    <Layout>
+    <Layout title={'About Us'}>
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img
