@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import connect_db from './config/db.js';
 import authRoutes from './routes/auth_route.js';
 import cors from 'cors';
+import categorRoutes from './routes/categoryRoutes.js';
 
 //configure dotenv
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 
 //routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/category', categorRoutes);
 
 // rest api create
 app.get('/', (req, res) => {
