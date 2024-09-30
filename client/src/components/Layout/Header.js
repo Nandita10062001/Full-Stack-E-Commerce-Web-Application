@@ -64,14 +64,36 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <li className="nav-item">
-                    <button
-                      onClick={handleLogout}
-                      className="nav-link btn btn-link"
-                      style={{ textDecoration: 'none' }}
+                  <li className="nav-item dropdown">
+                    <NavLink
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
                     >
-                      LOGOUT
-                    </button>
+                      {auth?.user?.name}
+                    </NavLink>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <NavLink
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? 'admin' : 'user'
+                          }`}
+                          className="dropdown-item"
+                        >
+                          Dashboard
+                        </NavLink>
+                        <NavLink
+                          onClick={handleLogout}
+                          to="/login"
+                          className="dropdown-item"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          LOGOUT
+                        </NavLink>
+                      </li>
+                    </ul>
                   </li>
                 </>
               )}
