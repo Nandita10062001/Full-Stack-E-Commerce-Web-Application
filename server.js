@@ -7,6 +7,7 @@ import authRoutes from './routes/auth_route.js';
 import cors from 'cors';
 import categoryRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import formidable from 'formidable';
 
 //configure dotenv
 dotenv.config();

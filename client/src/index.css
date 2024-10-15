@@ -216,3 +216,9 @@ button {
 button:hover {
   background-color: #357ABD;
 }
+
+/* Product Page */
+.product-link{
+  text-decoration: none !important;
+  color: #000000 !important;
+}
