@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import CategoryForm from '../../components/Form/CategoryForm';
 import { Modal } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
+import CategoryEdit from '../../components/Form/CategoryEdit';
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -25,7 +27,7 @@ const CreateCategory = () => {
         toast.success(`Category ${name} Created Successfully!`);
         getAllCategory();
       } else {
-        toast.error(data.message);
+        toast.error(data?.message);
       }
     } catch (error) {
       console.log(error);
@@ -95,13 +97,13 @@ const CreateCategory = () => {
 
   return (
     <Layout title={'Create Category'}>
-      <div className="container-fluid m-3 p-3">
+      <div className="container-fluid p-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
-          <div className="col-md-9">
-            <h1>Manage Categories</h1>
+          <div className="col-md-9 mt-3">
+            <h1 className='text-center'>Manage Categories</h1>
             <div className="p-3 w-50">
               <CategoryForm
                 handleSubmit={handleSubmit}
@@ -109,7 +111,7 @@ const CreateCategory = () => {
                 setValue={setName}
               />
             </div>
-            <div className="w-75">
+            <div className="w-75 ">
               <table className="table">
                 <thead>
                   <tr>
@@ -152,12 +154,22 @@ const CreateCategory = () => {
               onCancel={() => setVisible(false)}
               footer={null}
               open={visible}
+              closeIcon={
+                <CloseOutlined style={{ fontSize: '18px', color: '#555' }} />
+              }
+              style={{ borderRadius: '8px', padding: 0 }}
+              className="custom-modal"
             >
-              <CategoryForm
-                value={updatedName}
-                setValue={setUpdatedName}
-                handleSubmit={handleUpdate}
-              />
+              <div className="modal-header">
+                <h5>Edit Category</h5>
+              </div>
+              <div className="modal-content">
+                <CategoryEdit
+                  value={updatedName}
+                  setValue={setUpdatedName}
+                  handleSubmit={handleUpdate}
+                />
+              </div>
             </Modal>
           </div>
         </div>
