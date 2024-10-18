@@ -98,7 +98,7 @@ export const getProductController = async (req, res) => {
       .find({})
       .populate('category')
       .select('-photo')
-      .limit(12)
+      .limit(18)
       .sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
@@ -171,6 +171,71 @@ export const deleteProductController = async (req, res) => {
       success: false,
       error,
       message: 'Error while Deleting the Product',
+    });
+  }
+};
+
+//filters
+export const productFilterController = async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const products = await productModel.find(args);
+    res.status(200).send({
+      success: 200,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error while filtering products',
+    });
+  }
+};
+
+// product-count
+export const productCountController = async (req, res) => {
+  try {
+    const total = await productModel.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error in getting the count of the Product',
+    });
+  }
+};
+
+// product-per-page (pagination)
+export const productListController = async (req, res) => {
+  try {
+    const perPage = 8;
+    const page = req.params.page ? req.params.page : 1;
+    const products = await productModel
+      .find({})
+      .select('-photo')
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .sort({ createdAt: -1 });
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: 'Error in Pagination',
     });
   }
 };

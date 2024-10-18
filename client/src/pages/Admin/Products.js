@@ -29,35 +29,41 @@ const Products = () => {
   return (
     <Layout title={'All Products'}>
       <div>
-        <div className="row">
-          <div className="col-md-3">
-            <AdminMenu />
-          </div>
-          <div className="col-md-9">
-            <h1 className="text-center mt-3"> All Products</h1>
-            <div className="d-flex">
-              {products?.map((p) => (
-                <Link
-                  key={p._id}
-                  to={`/dashboard/admin/product/${p.slug}`}
-                  className="product-link"
-                >
-                  <div className="card m-2" style={{ width: '18rem' }}>
-                    <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
-                      className="card-img-top"
-                      alt={p.name}
-                    />
-                    <div className="card-body">
-                      <div className="d-flex justify-content-between">
-                        <h5 className="card-title">{p.name}</h5>
-                        <h5>{p.price}$</h5>
+        <div className="container-fluid p-3">
+          <div className="row">
+            <div className="col-md-3">
+              <AdminMenu />
+            </div>
+            <div className="col-md-9">
+              <h1 className="text-center mt-3"> All Products</h1>
+              <div className="row">
+                {products.map((p) => (
+                  <div key={p._id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    {' '}
+                    <Link
+                      to={`/dashboard/admin/product/${p.slug}`}
+                      className="product-link"
+                    >
+                      <div className="card">
+                        <img
+                          src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                          className="card-img-top"
+                          alt={p.name}
+                        />
+                        <div className="card-body">
+                          <div className="d-flex justify-content-between">
+                            <h6 className="card-title">{p.name}</h6>
+                            <h5>{p.price}$</h5>
+                          </div>
+                          <p className="card-text">
+                            {p.description.substring(0, 25)}...
+                          </p>
+                        </div>
                       </div>
-                      <p className="card-text">{p.description}</p>
-                    </div>
+                    </Link>
                   </div>
-                </Link>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
