@@ -9,19 +9,21 @@ const CartPage = () => {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
 
-  //total 
+  //total
   const totalPrice = () => {
-    try{
+    try {
       let total = 0;
-      cart?.map((item) => {total = total + item.price})
+      cart?.map((item) => {
+        total = total + item.price;
+      });
       return total.toLocaleString('en-us', {
-        style: "currency",
-        currency: 'USD'
-      })
-    }catch (error){
-      console.log(error)
+        style: 'currency',
+        currency: 'USD',
+      });
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   //delete item
   const removeCartItem = (pid) => {
@@ -78,10 +80,42 @@ const CartPage = () => {
             ))}
           </div>
           <div className="col-md-4">
-            <h2 className='text-center'>Cart Summary</h2>
-            <p className='text-center'>Total | Checkout | Payment</p>
-            <hr/>
+            <h2 className="text-center">Cart Summary</h2>
+            <p className="text-center">Total | Checkout | Payment</p>
+            <hr />
             <h4>Total: {totalPrice()} </h4>
+            {auth?.user?.address ? (
+              <>
+                <div className="mb-3">
+                  <h4>Current Address</h4>
+                  <h5>{auth?.user?.address}</h5>
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => navigate('/dashboard/user/profile')}
+                  >
+                    Update Address
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="mb-3">
+                {auth?.token ? (
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => navigate('/dashboard/user/profile')}
+                  >
+                    Update Address
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => navigate('/login', { state: '/cart' })}
+                  >
+                    Please Login to Checkout
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
