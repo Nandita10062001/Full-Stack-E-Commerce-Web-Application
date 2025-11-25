@@ -152,7 +152,7 @@ Before you begin, ensure you have the following installed:
    # Database
    MONGODB_URI=mongodb://localhost:27017/ecommerce
    # Or for MongoDB Atlas:
-   # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ecommerce
+   # MONGODB_URI=URI
 
    # JWT Secret
    JWT_SECRET=your_jwt_secret_key_here
